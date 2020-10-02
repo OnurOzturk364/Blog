@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bloggerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="makale">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="baslik" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="makale1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tarih" Type="DateTime" Precision="3" />
+    <Property Name="yazar_id" Type="Int32" />
+    <NavigationProperty Name="yazar" Relationship="Self.FK_makale_yazar" FromRole="makale" ToRole="yazar" />
+    <Property Name="kategori_id" Type="Int32" />
+    <NavigationProperty Name="kategori" Relationship="bloggerModel.FK_makale_kategori" FromRole="makale" ToRole="kategori" />
+    <NavigationProperty Name="resim" Relationship="bloggerModel.FK_resim_makale" FromRole="makale" ToRole="resim" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="yazar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tel_no" Type="Int32" />
+    <Property Name="yetki" Type="Int32" />
+    <NavigationProperty Name="makale" Relationship="Self.FK_makale_yazar" FromRole="yazar" ToRole="makale" />
+    <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_makale_yazar">
+    <End Role="yazar" Type="Self.yazar" Multiplicity="0..1" />
+    <End Role="makale" Type="Self.makale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yazar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="makale">
+        <PropertyRef Name="yazar_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bloggerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="makale" EntityType="Self.makale" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="yazar" EntityType="Self.yazar" />
+    <AssociationSet Name="FK_makale_yazar" Association="Self.FK_makale_yazar">
+      <End Role="yazar" EntitySet="yazar" />
+      <End Role="makale" EntitySet="makale" />
+    </AssociationSet>
+    <EntitySet Name="kategori" EntityType="bloggerModel.kategori" />
+    <AssociationSet Name="FK_makale_kategori" Association="bloggerModel.FK_makale_kategori">
+      <End Role="kategori" EntitySet="kategori" />
+      <End Role="makale" EntitySet="makale" />
+    </AssociationSet>
+    <EntitySet Name="resim" EntityType="bloggerModel.resim" />
+    <AssociationSet Name="FK_resim_makale" Association="bloggerModel.FK_resim_makale">
+      <End Role="makale" EntitySet="makale" />
+      <End Role="resim" EntitySet="resim" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="kategori">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="makale" Relationship="bloggerModel.FK_makale_kategori" FromRole="kategori" ToRole="makale" />
+  </EntityType>
+  <Association Name="FK_makale_kategori">
+    <End Type="bloggerModel.kategori" Role="kategori" Multiplicity="0..1" />
+    <End Type="bloggerModel.makale" Role="makale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategori">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="makale">
+        <PropertyRef Name="kategori_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="resim">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="resim_yol" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="yazi_id" Type="Int32" />
+    <Property Name="varsayilan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="makale" Relationship="bloggerModel.FK_resim_makale" FromRole="resim" ToRole="makale" />
+  </EntityType>
+  <Association Name="FK_resim_makale">
+    <End Type="bloggerModel.makale" Role="makale" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="bloggerModel.resim" Role="resim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="makale">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="resim">
+        <PropertyRef Name="yazi_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

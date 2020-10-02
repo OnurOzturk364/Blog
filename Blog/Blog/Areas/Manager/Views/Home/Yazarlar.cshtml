@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Yazarlar";
+}
+
+@model IEnumerable<Blog.Models.yazar>
+
+
+<section class="panel">
+    <header class="panel-heading">
+        Yazarlar
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="/Manager/Home/YazarEkle" class="btn btn-success">
+                        Yeni Yazar <i class="icon-plus"></i>
+                    </a>
+
+                </div>
+                <br />
+                <br />
+
+            </div>
+            <div class="space15"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Email</th>
+                        <th>Adres</th>
+                        <th>Telefon</th>
+                        <th>Yetki</th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var yazar in Model)
+                    {
+                    <tr class="">
+                        <td>@yazar.adi</td>
+                        <td>@yazar.soyadi</td>
+                        <td>@yazar.email</td>
+                        <td>@yazar.adres</td>
+                        <td>@yazar.tel_no</td>
+                        <td>@yazar.yetki</td>
+                       
+                     
+                        <td><a class="edit" href="/Manager/Home/YazarDuzenle/@yazar.id"> <i class="icon-pencil"></i></a></td>
+                        <td><a class="delete" href="/Manager/Home/YazarSil/@yazar.id"><i class="icon-trash"></i></a></td>
+
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+

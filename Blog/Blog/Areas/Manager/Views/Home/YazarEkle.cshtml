@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "YazarEkle";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br /><br /><br /><br /><br />
+
+@{
+    using (Html.BeginForm("YazarEkle", "Home", FormMethod.Post))
+    {
+
+                              <div>
+                                  <label>Yazar Adı</label><br />
+                                  <input type="text" name="Adi" value="" /><br />
+
+                                  <label>Yazar Soyadı</label><br />
+                                  <input type="text" name="Soyad" value="" /><br />
+
+                                  <label>E-Mail</label><br />
+                                  <input type="text" name="email" value="" /><br />
+
+                                  <label>Adres</label><br />
+                                  <input type="text" name="adres" value="" /><br />
+
+                                  <label>Telefon Numarası</label><br />
+                                  <input type="text" name="telno" value="" /><br />
+
+                                  <label>Yetki Derecesi</label><br />
+                                  <input type="text" name="yetki" value="" /><br />
+
+                                  <label>Şifre</label><br />
+                                  <input type="password" name="sifre" value="" /><br />
+
+                                  <input type="submit" value="Kaydet" />
+                              </div>
+    }
+}

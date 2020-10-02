@@ -1,0 +1,46 @@
+﻿@model  Blog.Models.MakaleListesiModel
+@{
+    ViewBag.Title = "MakaleDetay";
+    Layout = "~/Views/Shared/DetayLayout.cshtml";
+}
+
+<section class="s-content s-content--narrow s-content--no-padding-bottom">
+
+    <article class="row format-standard">
+
+        <div class="s-content__header col-full">
+            <h1 class="s-content__header-title">
+                @Model.Baslik
+            </h1>
+            <ul class="s-content__header-meta">
+                <li class="date">@Model.Tarih</li>
+                <li class="cat">
+                    In
+                    <a href="#">@Model.YazarAdi</a>
+                    <a href="#">Travel</a>
+                </li>
+            </ul>
+        </div> <!-- end s-content__header -->
+
+        
+                <div class="s-content__media col-full">
+                    <div class="s-content__post-thumb">
+                        <img src="~/Image/@Model.resim_yol"
+                             srcset="~/Image/@Model.resim_yol"
+                             sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                    </div>
+                </div>
+
+           
+        <!-- end s-content__media -->
+
+        <div class="col-full s-content__main">
+
+
+            <p>
+                @Model.Yazi
+            </p>
+        </div>
+    </article>
+</section>
+

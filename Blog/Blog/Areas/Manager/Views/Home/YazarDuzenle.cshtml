@@ -1,0 +1,32 @@
+﻿@model Blog.Models.yazar
+@{
+    ViewBag.Title = "YazarDuzenle";
+}
+
+<br /><br /><br /><br />
+@{
+    using (Html.BeginForm("YazarDuzenle", "Home", FormMethod.Post))
+    {
+
+                  <div>
+                      <label>ID</label><br />
+                      <input type="text" value="@Model.id" /><br />
+                      <label>Yazar Adı</label><br />
+                      <input type="text" name="adi" value="@Model.adi" /><br />
+                      <label>Yazar Soyadı</label><br />
+                      <input type="text" name="soyadi" value="@Model.soyadi" /><br />
+                      <label>Yazar E-mail</label><br />
+                      <input type="text" name="email" value="@Model.email" /><br />
+                      <label>Yazar Adres</label><br />
+                      <input type="text" name="adres" value="@Model.adres" /><br />
+                      <label>Yazar Telefon</label><br />
+                      <input type="text" name="tel_no" value="@Model.tel_no" /><br />
+                      <label>Yazar Yetki Kodu</label><br />
+                      <input type="text" name="yetki" value="@Model.yetki" /><br />
+                      <label>Yazar Şifre</label><br />
+                      <input type="password" name="sifre" value="@Model.sifre" /><br />
+                      <input type="submit" value="Güncelle" />
+
+                  </div>
+    }
+}

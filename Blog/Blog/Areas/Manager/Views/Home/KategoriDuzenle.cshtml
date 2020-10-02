@@ -1,0 +1,20 @@
+﻿@model Blog.Models.kategori
+@{
+    ViewBag.Title = "KategoriDuzenle";
+}
+
+<br /><br /><br /><br />
+@{
+    using (Html.BeginForm("KategoriDuzenle", "Home", FormMethod.Post))
+    {
+
+        <div>
+            <label>ID</label><br />
+            <input type="text" value="@Model.id" /><br />
+            <label>Kategori Adı</label><br />
+            <input type="text" name="KategoriAdi" value="@Model.adi" /><br />
+            <input type="submit" value="Güncelle" />
+
+        </div>
+    }
+}

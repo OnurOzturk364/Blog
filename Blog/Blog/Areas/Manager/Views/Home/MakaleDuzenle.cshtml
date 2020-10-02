@@ -1,0 +1,30 @@
+﻿@model Blog.Models.MakaleListesiModel
+@{
+    ViewBag.Title = "MakaleDuzenle";
+}
+
+
+<br /><br /><br /><br /><br /><br />
+
+@{
+    using (Html.BeginForm("MakaleDuzenle", "Home", FormMethod.Post))
+    {
+
+                              <div>
+                                  @*<label>ID</label><br />
+        <input type="text" value="@Model.Id" /><br />*@
+                                  <label>Başlık</label><br />
+                                  <input type="text" name="Baslik" value="@Model.Baslik" /><br />
+                                  <label>Makale</label><br />
+                                  <textarea class="form-control" name="Yazi">@Model.Yazi </textarea>
+                                  <label>Kategori</label><br />
+                                  @Html.DropDownList("Kid", (SelectList)ViewBag.KategoriListesi, "Kategori Seçiniz", htmlAttributes: new { @class = "form-control  " })
+                                  <label>Yazar</label><br />
+                                  @Html.DropDownList("Yid", (SelectList)ViewBag.YazarListesi, "Yazar Seçiniz", htmlAttributes: new { @class = "form-control  " })
+
+
+                                  <input type="submit" value="Güncelle" />
+
+                              </div>
+    }
+}

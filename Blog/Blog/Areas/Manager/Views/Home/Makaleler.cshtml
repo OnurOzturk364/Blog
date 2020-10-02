@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Makaleler";
+}
+
+@model IEnumerable<Blog.Models.MakaleListesiModel>
+
+
+<section class="panel">
+    <header class="panel-heading">
+        Makaleler
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="/Manager/Home/MakaleEkle" class="btn btn-success">
+                        Yeni Makale <i class="icon-plus"></i>
+                    </a>
+
+                </div>
+                <br />
+                <br />
+
+            </div>
+            <div class="space15"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Başlık</th>
+                        <th>Makale</th>
+                        <th>Eklenme Tarihi</th>
+                        <th>Yazar</th>
+                        <th>Kategori</th>
+                        <th>Resim Ekle</th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var makale in Model)
+                    {
+                    <tr class="">
+                        <td>@makale.Id</td>
+                        <td>@makale.Baslik</td>
+                        <td>@makale.Yazi</td>
+                        <td>@makale.Tarih</td>
+                        <td>@makale.YazarAdi</td>
+                        <td>@makale.KategoriAdi</td>
+                        <td><a class="add-bottom" href="/Manager/Home/ResimEkle/@makale.Id"><i class="icon-plus"></i></a></td>
+                        <td><a class="edit" href="/Manager/Home/MakaleDuzenle/@makale.Id"> <i class="icon-pencil"></i></a></td>
+                        <td><a class="delete" href="/Manager/Home/MakaleSil/@makale.Id"><i class="icon-trash"></i></a></td>
+
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>

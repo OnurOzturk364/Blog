@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bloggerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="kategori">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adi" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="makale">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="baslik" Type="nvarchar" MaxLength="100" />
+    <Property Name="makale" Type="nvarchar(max)" />
+    <Property Name="tarih" Type="datetime" />
+    <Property Name="yazar_id" Type="int" />
+    <Property Name="kategori_id" Type="int" />
+  </EntityType>
+  <EntityType Name="resim">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="resim_yol" Type="nvarchar" MaxLength="250" />
+    <Property Name="yazi_id" Type="int" />
+    <Property Name="varsayilan" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="yazar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adi" Type="nvarchar" MaxLength="50" />
+    <Property Name="soyadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="adres" Type="nvarchar" MaxLength="50" />
+    <Property Name="tel_no" Type="int" />
+    <Property Name="yetki" Type="int" />
+    <Property Name="sifre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_makale_kategori">
+    <End Role="kategori" Type="Self.kategori" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="makale" Type="Self.makale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategori">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="makale">
+        <PropertyRef Name="kategori_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_makale_yazar">
+    <End Role="yazar" Type="Self.yazar" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="makale" Type="Self.makale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yazar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="makale">
+        <PropertyRef Name="yazar_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_resim_makale">
+    <End Role="makale" Type="Self.makale" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="resim" Type="Self.resim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="makale">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="resim">
+        <PropertyRef Name="yazi_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="bloggerModelStoreContainer">
+    <EntitySet Name="kategori" EntityType="Self.kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="makale" EntityType="Self.makale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="resim" EntityType="Self.resim" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="yazar" EntityType="Self.yazar" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_makale_kategori" Association="Self.FK_makale_kategori">
+      <End Role="kategori" EntitySet="kategori" />
+      <End Role="makale" EntitySet="makale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_makale_yazar" Association="Self.FK_makale_yazar">
+      <End Role="yazar" EntitySet="yazar" />
+      <End Role="makale" EntitySet="makale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_resim_makale" Association="Self.FK_resim_makale">
+      <End Role="makale" EntitySet="makale" />
+      <End Role="resim" EntitySet="resim" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

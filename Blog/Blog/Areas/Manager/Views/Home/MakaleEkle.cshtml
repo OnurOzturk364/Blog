@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "MakaleEkle";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br /><br /><br /><br /><br />
+
+                                  @{
+                                      using (Html.BeginForm("MakaleEkle", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                      {
+
+                              <div>
+                                 
+                                  <label>Başlık</label><br />
+                                  <input type="text" name="baslikk" value="" /><br />
+                                  <label>Makale</label><br />
+                                  <textarea class="form-control" name="yazii"> </textarea>
+                                  <label>Kategori</label><br />
+                                  @Html.DropDownList("Kid", (SelectList)ViewBag.KategoriListesi, "Kategori Seçiniz", htmlAttributes: new { @class = "form-control  " })
+                                  <label>Yazar</label><br />
+                                  @Html.DropDownList("Yid", (SelectList)ViewBag.YazarListesi, "Yazar Seçiniz", htmlAttributes: new { @class = "form-control  " })
+                                  <label>Resim</label><br />
+                                  <input type="file" class="multi" name="varsayilan" /><br />
+                                  <input type="submit" value="Kaydet" />
+                              </div>
+                                      }
+                                  }

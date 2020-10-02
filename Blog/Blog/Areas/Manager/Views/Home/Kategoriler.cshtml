@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Kategoriler";
+}
+
+
+@model IEnumerable<Blog.Models.kategori>
+
+
+<section class="panel">
+    <header class="panel-heading">
+        Kategoriler
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="/Manager/Home/KategoriEkle" class="btn btn-success">
+                        Yeni Kategori <i class="icon-plus"></i>
+                    </a>
+
+                </div>
+                <br />
+                <br />
+
+            </div>
+            <div class="space15"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Adı</th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var kategori in Model)
+                    {
+                        <tr class="">
+                            <td>@kategori.adi</td>
+                            
+                           
+                            <td><a class="edit" href="/Manager/Home/KategoriDuzenle/@kategori.id"> <i class="icon-pencil"></i></a></td>
+                            <td><a class="delete" href="/Manager/Home/KategoriSil/@kategori.id"><i class="icon-trash"></i></a></td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+

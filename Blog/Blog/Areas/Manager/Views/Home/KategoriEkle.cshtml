@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "KategoriEkle";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br /><br /><br /><br /><br />
+
+@{
+    using (Html.BeginForm("KategoriEkle", "Home", FormMethod.Post))
+    {
+
+        <div>
+            <label>Kategori Adı</label><br />
+            <input type="text" name="kategorii" value="" /><br />
+            <input type="submit" value="Kaydet" />
+        </div>
+    }
+}
+

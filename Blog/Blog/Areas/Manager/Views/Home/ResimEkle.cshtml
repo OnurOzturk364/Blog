@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "ResimEkle";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<br /><br /><br /><br /><br /><br />
+
+@{
+    using (Html.BeginForm("ResimEkle", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" class="multi" name="resim" /><br />
+        <input type="submit" value="Yükle" />
+    }
+}
